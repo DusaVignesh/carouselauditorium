@@ -1,4 +1,4 @@
-<%- include("header") -%>
+<%- include("adminHeader") -%>
 </head>
 <body>
     <!-- Layout wrapper -->
@@ -8,7 +8,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="./view-auditorium.html" class="app-brand-link">
+                    <a href="./" class="app-brand-link">
                         <span class="menu-text fw-bolder ms-2" style="font-size: 18px;">Auditorium Booking System</span>
                     </a>
                 </div>
@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="./view-auditorium" class="menu-link">
+                        <a href="./" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-store-alt"></i>
                             <div data-i18n="Account Settings">View Details</div>
                         </a>
@@ -49,7 +49,7 @@
                                     <h5 class="mb-0">Add Auditorium</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action="/add-auditorium" method="post">
+                                    <form action="./add-auditorium" method="post">
                                         <div class="row mb-3">
                                             <label class="col-sm-2 col-form-label" for="Auditorium-Name">Auditorium Name</label>
                                             <div class="col-sm-10">
@@ -73,6 +73,13 @@
                                                     <textarea type="text" id="meta-description" class="form-control" maxlength="161" placeholder="Meta Description" aria-label="Meta Description" name="description"></textarea>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-2 col-form-label" for="image">Image</label>
+                                            <div class="col-sm-10"><div class="input-group input-group-merge">
+                                                <input type="file" id="image" class="form-control" name="auditoriumImage" />
+                                            </div>
+                                            <div class="form-text">Image Size : 100px x 100px</div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-10">
@@ -109,4 +116,4 @@
                         </div>
                       </div>
                     <!-- / Content -->
-<%- include("footer") -%>
+<%- include("adminFooter") -%>

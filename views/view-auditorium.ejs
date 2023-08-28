@@ -1,4 +1,4 @@
-<%- include("header") -%>
+<%- include("adminHeader") -%>
 </head>
 
 <body>
@@ -9,7 +9,7 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="./view-auditorium" class="app-brand-link">
+                    <a href="./" class="app-brand-link">
                         <span class="menu-text fw-bolder ms-2" style="font-size: 18px;">Auditorium Booking System</span>
                     </a>
                 </div>
@@ -21,9 +21,9 @@
                         </a>
                     </li>
                     <li class="menu-item active">
-                        <a href="./view-auditorium" class="menu-link">
+                        <a href="./" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-store-alt"></i>
-                            <div data-i18n="Account Settings">View Details</div>
+                            <div data-i18n="Account Settings">View Auditorium</div>
                         </a>
                     </li>
                     <li class="menu-item">
@@ -48,12 +48,12 @@
                             <div class="card">
                                 <div class="card-body">
                                   <% auditoriumlist.forEach(function(list){ %>
-                                  <div class="row">
+                                  <div class="row mb-3">
                                         <div class="col-lg-12">
                                           <div class="card mb-3">
                                             <div class="row g-0">
                                               <div class="col-md-4">
-                                                <img class="card-img card-img-left" src="../../includes/assets/img/elements/12.jpg" alt="Card image" />
+                                                <img class="card-img card-img-left h-100 w-100" src="/images/outputs/<%= list.imageName %>" alt="Card image" />
                                               </div>
                                               <div class="col-md-8">
                                                 <div class="card-body">
@@ -98,4 +98,4 @@
                     </div>
                     <!-- / Content -->
 
-<%- include("footer") -%>
+<%- include("adminFooter") -%>

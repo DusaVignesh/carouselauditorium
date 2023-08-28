@@ -1,4 +1,4 @@
-<%- include("header") -%>
+<%- include("adminHeader") -%>
 
 </head>
 
@@ -10,19 +10,19 @@
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="./view-detail.html" class="app-brand-link">
-                        <span class="menu-text fw-bolder ms-2" style="font-size: 18px;">Auditorium Booking System</span>
+                    <a href="./" class="app-brand-link">
+                        <span class="menu-text fw-bolder ms-2" style="font-size: 18px;">RGUKT Auditorium Booking System</span>
                     </a>
                 </div>
                 <ul class="menu-inner py-1">
                     <li class="menu-item">
-                        <a href="./book-auditorium.html" class="menu-link">
+                        <a href="./book-auditorium" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-store-alt"></i>
-                            <div data-i18n="Account Settings">Add Auditorium</div>
+                            <div data-i18n="Account Settings">Book Auditorium</div>
                         </a>
                     </li>
                     <li class="menu-item active">
-                        <a href="./view-detail.html" class="menu-link">
+                        <a href="./" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-store-alt"></i>
                             <div data-i18n="Account Settings">View Details</div>
                         </a>
@@ -46,48 +46,55 @@
 
                     <div class="container-xxl container-p-y">
                         <div class="col-lg-12 mb-4 order-0">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row mb-5">
-                                        <div class="col-md">
-                                          <div class="card mb-3">
-                                            <div class="row g-0">
-                                              <div class="col-md-4">
-                                                <img class="card-img card-img-left" src="../../includes/assets/img/elements/12.jpg" alt="Card image" />
-                                              </div>
-                                              <div class="col-md-8">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Card title</h5>
-                                                  <p class="card-text">
-                                                    This is a wider card with supporting text below as a natural lead-in to additional content.
-                                                    This content is a little bit longer.
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </div>
+                          <form action="./deleteEvent" method="post">
+                            <% eventLists.forEach(function(event){ %>
+                              <div class="card mb-4">
+                                <div class="card-header d-flex justify-content-between">
+                                  <div class="card-action-title">Remove Card</div>
+                                  <div class="card-action-element">
+                                    <ul class="list-inline mb-0">
+                                      <li class="list-inline-item">
+                                        <button type="submit" class="btn bg-transparent text-primary" name="id" value="<%= event._id %>"><i class="tf-icons bx bx-x"></i></button>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-lg-6">
+                                        <img class="card-img card-img-left h-100 w-100"  src="/images/<%= event.bannerImage %>" alt="Card image" />
+                                      </div>
+                                      <div class="col-lg-6">
+                                        <p class="fs-4 text-dark fw-bold"><%= event.Title.toUpperCase() %></p>
+                                        <p><span class="fs-6 fw-bold text-dark">Guests:</span>
+                                          <% event.guests.forEach(function(guest){ %>
+                                            <span><%= guest.value %>,</span>
+                                          <% }) %>
+                                          <span>.</span>
+                                        </p>
+                                        <p><span class="fs-6 fw-bold text-dark">Seats Reserved:</span>
+                                          <span><%= event.bookedSeats %></span></p>
+                                        <p><span class="fs-6 fw-bold text-dark">Ocassion:</span>
+                                           <span><%= event.ocassion %></span></p>
+                                        <p class="mb-5"><span class="fs-6 fw-bold text-dark">Venue:</span>
+                                           <span><%= event.auditoriumName %></span></p>
+                                        <div class="row">
+                                          <div class="col-lg-6">
+                                            <p class="mb-1" style="font-size: .8rem;">Start Date and Timing</p>
+                                            <p class="fw-bold fs-5 text-primary"><%= event.sDate %> <%= event.startTiming %></p>
                                           </div>
-                                        </div>
-                                        <div class="col-md">
-                                          <div class="card mb-3">
-                                            <div class="row g-0">
-                                                <div class="col-md-4">
-                                                  <img class="card-img card-img-right" src="../../includes/assets/img/elements/17.jpg" alt="Card image" />
-                                                </div>
-                                              <div class="col-md-8">
-                                                <div class="card-body">
-                                                  <h5 class="card-title">Card title</h5>
-                                                  <p class="card-text">
-                                                    This is a wider card with supporting text below as a natural lead-in to additional content.
-                                                    This content is a little bit longer.
-                                                  </p>
-                                                </div>
-                                              </div>
-                                            </div>
+                                          <div class="col-lg-6">
+                                            <p class="mb-1" style="font-size: .8rem;">End Date and Timing</p>
+                                            <p class="fw-bold fs-5 text-primary"><%= event.eDate %> <%= event.endTiming %></p>
                                           </div>
                                         </div>
                                       </div>
-                                </div>
-                            </div>
+                                    </div>
+                                    <p class="mt-4"><%= event.description %></p>
+                                  </div>
+                              </div>
+                              <% }) %>
+                          </form>
                         </div>
                     </div>
                     <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
@@ -112,4 +119,4 @@
                       </div>
                     </div>
                     <!-- / Content -->
-<%- include("footer") -%>
+<%- include("adminFooter") -%>
