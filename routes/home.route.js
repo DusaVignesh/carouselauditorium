@@ -22,5 +22,6 @@ homeRoute
 homeRoute
     .route('/login')
     .get(homeController.handleLoginPage)
+    .post(homeController.handlePostLoginPage)
 
 module.exports=homeRoute;
