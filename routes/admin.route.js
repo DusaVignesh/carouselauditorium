@@ -1,14 +1,19 @@
-const express=require('express');
-const adminRoute=express.Router();
-const {adminController}=require('../controllers');
+const express = require('express');
+const adminRoute = express.Router();
+const { adminController } = require('../controllers');
 
 adminRoute
-.route('/')
-.get(adminController.handleAdminViewAuditorium)
+    .route('/')
+    .get(adminController.handleAdminViewAuditorium)
 
 adminRoute
-.route('/add-auditorium')
-.get(adminController.handleGetAuditorium)
-.post(adminController.handleAddAuditorium)
+    .route('/add-auditorium')
+    .get(adminController.handleGetAuditorium)
+    .post(adminController.handleAddAuditorium)
 
-module.exports=adminRoute;
+adminRoute
+    .route('/view-feedbacks')
+    .get(adminController.handleGetFeedbacks)
+    .post(adminController.handlePostDeleteFeedback)
+
+module.exports = adminRoute;
