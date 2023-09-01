@@ -3,7 +3,7 @@ const app = require('../app');
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { addAuditorium, addFeedback } = require('../models');
+const { addAuditorium, addFeedback, addEvent } = require('../models');
 const base64ArrayBuffer = require('base64-arraybuffer');
 
 app.set('view engine', 'ejs');
@@ -47,7 +47,7 @@ const handleAddAuditorium = async function (req, res) {
 
     await addAuditorium.create(newAuditorium);
 
-    res.redirect('./');
+    res.redirect('./view');
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Internal Server Error');
@@ -61,6 +61,33 @@ const handlePostDeleteFeedback = async function (req, res) {
   const r = await addFeedback.deleteOne({ _id: req.body.id });
   res.redirect('./view-feedbacks');
 }
+const handleViewEvents = async function (req, res) {
+  try {
+    const list = await addEvent.find({});
+    await Promise.all(list.map(async auditorium => {
+      const outputPath = `/home/siddharth/Desktop/project/auditoriumBookingnew/public/images/outputs/${auditorium.bannerImage}`;
+      try {
+        await fs.promises.writeFile(outputPath, auditorium.bannerImage);
+        const sDate = new Date(auditorium.startDate);
+        const eDate = new Date(auditorium.startDate);
+        auditorium['sDate'] = `${sDate.getFullYear()}-${sDate.getMonth() + 1}-${sDate.getDate()}`
+        auditorium['eDate'] = `${eDate.getFullYear()}-${eDate.getMonth() + 1}-${eDate.getDate()}`
+      } catch (error) {
+        console.error('Error writing image:', error);
+      }
+    }));
+    res.render('admin-events', { eventLists: list })
+  }
+  catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+const handleDeleteEvent = async function (req, res) {
+  console.log(typeof req.body.id);
+  const r = await addEvent.deleteOne({ _id: req.body.id });
+  console.log(r);
+  res.redirect('./');
+}
 
-
-module.exports = { handleAdminViewAuditorium, handleGetAuditorium, handleAddAuditorium, handleGetFeedbacks, handlePostDeleteFeedback }
+module.exports = { handleAdminViewAuditorium, handleGetAuditorium, handleAddAuditorium, handleGetFeedbacks, handlePostDeleteFeedback, handleViewEvents, handleDeleteEvent }

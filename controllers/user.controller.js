@@ -118,11 +118,6 @@ const handleBookAuditorium = async function (req, res) {
     console.log(e);
   }
 }
-const handleDeleteEvent = async function (req, res) {
-  console.log(typeof req.body.id);
-  const r = await addEvent.deleteOne({ _id: req.body.id });
-  console.log(r);
-  res.redirect('./');
-}
 
-module.exports = { handleViewAuditorium, handleGetAuditorium, handleGetNoofSeats, handleBookAuditorium, handleDeleteEvent };
+
+module.exports = { handleViewAuditorium, handleGetAuditorium, handleGetNoofSeats, handleBookAuditorium };

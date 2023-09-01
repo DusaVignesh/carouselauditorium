@@ -32,6 +32,91 @@
 
             <div class="container-xxl flex-grow-1 container-p-y px-0">
               <div class="col-xxl">
+                <div class="row <% status===0 ? 'd-none' : 'd-block' %>">
+                  <div class="col-md">
+                    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                      <ol class="carousel-indicators">
+                        <% var i=0; %>
+                          <% eventLists.forEach(function(event){ %>
+                            <li data-bs-target="#carouselExample" data-bs-slide-to="<%= i %>"
+                              class="<%= i===0 ? 'active': ''%>"></li>
+                            <% i++; %>
+                              <% }) %>
+                      </ol>
+                      <div class="carousel-inner">
+                        <% var j=0; %>
+                          <% eventLists.forEach(function(event){ %>
+                            <div class="carousel-item <%= j===0 ? 'active': ''%>">
+                              <div class="card bg-primary" style="height: 60vh">
+                                <div class="card-body" style="padding: 4rem;">
+                                  <div class="row">
+                                    <div class="col-lg-6">
+                                      <img class="card-img card-img-left h-100 w-100"
+                                        src="/images/<%= event.bannerImage %>" alt="Card image" />
+                                    </div>
+                                    <div class="col-lg-6">
+                                      <p class="fs-4 text-white fw-bold">
+                                        <%= event.Title.toUpperCase() %>
+                                      </p>
+                                      <p><span class="fs-6 fw-bold text-dark"
+                                          style="background-color: white;">Guests:</span>
+                                        <% event.guests.forEach(function(guest){ %>
+                                          <span span class="text-white fw-bold">
+                                            <%= guest.value %>,
+                                          </span>
+                                          <% }) %>
+                                            <span>.</span>
+                                      </p>
+                                      <p><span class="fs-6 fw-bold text-dark"
+                                          style="background-color: white;">Ocassion:</span>
+                                        <span class="text-white fw-bold">
+                                          <%= event.ocassion %>
+                                        </span>
+                                      </p>
+                                      <p class="mb-5"><span class="fs-6 fw-bold text-dark"
+                                          style="background-color: white;">Venue:</span>
+                                        <span class="text-white fw-bold">
+                                          <%= event.auditoriumName %>
+                                        </span>
+                                      </p>
+                                      <div class="row">
+                                        <div class="col-lg-6">
+                                          <p class="mb-1 text-white" style="font-size: .8rem;">Start Date and Timing</p>
+                                          <p class="fw-bold fs-5 text-dark" style="background-color: white;"">
+                                            <%= event.sDate %>
+                                            <%= event.startTiming %>
+                                        </p>
+                                      </div>
+                                      <div class=" col-lg-6">
+                                          <p class="mb-1 text-white" style="font-size: .8rem;">End Date and Timing</p>
+                                          <p class="fw-bold fs-5 text-dark" style="background-color: white;">
+                                            <%= event.eDate %>
+                                              <%= event.endTiming %>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <p class=" mt-4 text-white">
+                                    <%= event.description %>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <% j++; %>
+                              <% }) %>
+                      </div>
+                      <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExample" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
                 <div class="card mb-12">
                   <div class="card-body">
                     <div class="row">
@@ -46,7 +131,8 @@
                               <div class="card-body">
                                 <h5 class="card-title">Auditorium Booking System</h5>
                                 <p class="card-text">
-                                  An auditorium booking system is a software or online platform that facilitates the
+                                  An auditorium booking system is a software or online platform that facilitates
+                                  the
                                   reservation and management of auditoriums for various events and functions. It
                                   streamlines the process of booking, scheduling, and organizing the use of an
                                   auditorium, ensuring efficient utilization of the space.

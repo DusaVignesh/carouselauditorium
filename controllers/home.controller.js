@@ -1,13 +1,34 @@
 const ejs = require('ejs');
 const app = require('../app');
 const express = require('express');
-const { addUser, addFeedback } = require('../models');
+const { addUser, addFeedback, addEvent } = require('../models');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-const handleHomePage = async (req, res) =>
-  res.render('index', {});
+const handleHomePage = async function (req, res) {
+  try {
+    const list = await addEvent.find({});
+    await Promise.all(list.map(async auditorium => {
+      const outputPath = `/home/siddharth/Desktop/project/auditoriumBookingnew/public/images/outputs/${auditorium.bannerImage}`;
+      try {
+        await fs.promises.writeFile(outputPath, auditorium.bannerImage);
+        const sDate = new Date(auditorium.startDate);
+        const eDate = new Date(auditorium.startDate);
+        auditorium['sDate'] = `${sDate.getFullYear()}-${sDate.getMonth() + 1}-${sDate.getDate()}`
+        auditorium['eDate'] = `${eDate.getFullYear()}-${eDate.getMonth() + 1}-${eDate.getDate()}`
+      } catch (error) {
+        console.error('Error writing image:', error);
+      }
+    }));
+    const status = list.length === 0 ? false : true;
+    res.render('index', { eventLists: list, status: status })
+  }
+  catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error');
+  }
+}
 
 const handleContactPage = async (req, res) =>
   res.render('contact-us', { statusText: '' });

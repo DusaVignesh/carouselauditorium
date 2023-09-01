@@ -15,8 +15,4 @@ userRoute
     .route('/noOfSeats')
     .post(userController.handleGetNoofSeats)
 
-userRoute
-    .route('/deleteEvent')
-    .post(userController.handleDeleteEvent)
-
 module.exports = userRoute;

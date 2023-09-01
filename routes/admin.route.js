@@ -4,6 +4,10 @@ const { adminController } = require('../controllers');
 
 adminRoute
     .route('/')
+    .get(adminController.handleViewEvents)
+
+adminRoute
+    .route('/view')
     .get(adminController.handleAdminViewAuditorium)
 
 adminRoute
@@ -15,5 +19,9 @@ adminRoute
     .route('/view-feedbacks')
     .get(adminController.handleGetFeedbacks)
     .post(adminController.handlePostDeleteFeedback)
+
+adminRoute
+    .route('/deleteEvent')
+    .post(adminController.handleDeleteEvent)
 
 module.exports = adminRoute;
